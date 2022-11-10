@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-DNA converter
+DNA sequence converter
 Takes two arguments - file name and number L
 """
 
@@ -29,11 +29,11 @@ def convert_dna(file_name: str, length: int):
 
     except FileNotFoundError:
         print(f'Error: File not found: {file_name}')
-        exit(1)
+        exit(10)
 
     except PermissionError:
         print(f'Error: Permission error while opening the file: {file_name}')
-        exit(1)
+        exit(11)
 
 
 if __name__ == '__main__':
@@ -48,6 +48,6 @@ if __name__ == '__main__':
         assert args.length > 0
     except AssertionError:
         print('Error: Number L must be a positive number')
-        exit(1)
+        exit(12)
 
     convert_dna(args.file_name, args.length)
