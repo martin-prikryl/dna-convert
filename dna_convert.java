@@ -5,6 +5,9 @@ import java.io.InputStream;
 
 /**
  * DNA sequence converter
+ * Input file is read by L bytes. Each byte of input file is considered to contain A-C-G-T base in 2 most
+ * significant bits. The rest 6 bits contain quality score.
+ * Input binary file is printed in FASTQ format.
  * Takes two arguments - file name and number L
  */
 public class Main {
@@ -25,6 +28,7 @@ public class Main {
             // read L bytes and write converted data
             while ((bytesRead = inputStream.read(data)) > 0) {
                 System.out.println("@READ_" + index);
+
                 // write 2 most significant bits of each byte converted to bases alphabet
                 StringBuilder output = new StringBuilder(L);
                 for (int i = 0; i < bytesRead; i++) {
@@ -33,6 +37,7 @@ public class Main {
                 System.out.println(output);
 
                 System.out.println("+READ_" + index);
+
                 // write bytes without 2 most significant bits increased by 33
                 output = new StringBuilder(L);
                 for (int i = 0; i < bytesRead; i++) {
@@ -58,7 +63,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // check we have at least two parameters
+        // check we have exaclty two parameters
         if (args.length != 2) {
             System.out.println("Error: Exactly two parameters must be specified: file name and positive number L.");
             System.exit(2);
